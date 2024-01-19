@@ -2,6 +2,8 @@ package com.reviewdoor.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "companies")
 public class Company {
@@ -12,6 +14,9 @@ public class Company {
 	private int founded_in;
 	private String headquarters;
 	private int emp_count;
+
+	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+	private List<Review> reviews;
 
 	public Company() {
 	}
@@ -62,6 +67,14 @@ public class Company {
 
 	public void setEmp_count(int emp_count) {
 		this.emp_count = emp_count;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 	@Override
